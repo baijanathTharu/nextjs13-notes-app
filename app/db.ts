@@ -23,8 +23,8 @@ class NotesDb implements INoteDB {
   ];
 
   async get(noteId: string) {
-    const note = this.notes.filter((note) => note.id === noteId)[0];
-    return note;
+    const note = this.notes.filter((note) => note.id === noteId);
+    return note[0];
   }
 
   async getAll() {
