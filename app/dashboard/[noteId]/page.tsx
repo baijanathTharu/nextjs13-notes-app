@@ -1,13 +1,7 @@
 import { notesDb } from '../../db';
 
-export default async function NoteDetailPage({
-  params,
-}: {
-  params: {
-    noteId: string;
-  };
-}) {
-  const note = await notesDb.get(params.noteId);
+export default async function NoteDetailPage(props: any) {
+  const note = await notesDb.getNote(props.params.noteId);
 
   if (!note) {
     return (

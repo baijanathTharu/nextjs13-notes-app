@@ -1,49 +1,39 @@
 import { generateRandomId } from './utils';
 
-interface INote {
+export interface INote {
   id: string;
   content: string;
 }
 
-interface INoteDB {
-  notes: INote[];
+const notes: INote[] = [
+  {
+    id: generateRandomId(),
+    content: 'This is a note of a user to do following tasks.',
+  },
+];
 
-  get: (noteId: string) => Promise<INote>;
-  getAll: () => Promise<INote[]>;
-  set: (content: string) => Promise<INote>;
-  delete: (noteId: string) => Promise<INote>;
-}
-
-class NotesDb implements INoteDB {
-  notes: INote[] = [
-    {
-      id: generateRandomId(),
-      content: 'This is a note of a user to do following tasks.',
-    },
-  ];
-
-  async get(noteId: string) {
-    const note = this.notes.filter((note) => note.id === noteId);
+export const notesDb = {
+  async getNote(noteId: string) {
+    const note = notes.filter((note) => note.id === noteId);
     return note[0];
-  }
+  },
 
-  async getAll() {
-    return this.notes;
-  }
+  async getAllNotes() {
+    return notes;
+  },
 
-  async set(content: string) {
+  async setNote(content: string) {
     const id = generateRandomId();
     const note = { id, content };
-    this.notes.push(note);
-    return note;
-  }
+    notes.push(note);
 
-  async delete(noteId: string) {
-    const noteIndex = this.notes.findIndex((note) => note.id === noteId);
-    const note = { ...this.notes[noteIndex] };
-    this.notes.splice(noteIndex, 1);
     return note;
-  }
-}
+  },
 
-export const notesDb = new NotesDb();
+  async deleteNote(noteId: string) {
+    const noteIndex = notes.findIndex((note) => note.id === noteId);
+    const note = { ...notes[noteIndex] };
+    notes.splice(noteIndex, 1);
+    return note;
+  },
+};

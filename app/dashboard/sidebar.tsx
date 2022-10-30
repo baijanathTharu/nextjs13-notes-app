@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CreateNote } from './create-note';
 import { NoteList } from './note-list';
 
 export function Sidebar() {
@@ -7,6 +8,8 @@ export function Sidebar() {
       <h2 className='text-center my-4 text-2xl font-semibold'>
         <Link href={'/dashboard'}>Notes</Link>
       </h2>
+
+      <CreateNote />
 
       <NoteList />
     </aside>
