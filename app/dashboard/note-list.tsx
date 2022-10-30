@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { notesDb } from '../db';
+import { asyncComponent } from '../utils';
 
-export async function NoteList() {
+async function NoteListAsync() {
   const notes = await notesDb.getAll();
   return (
     <div className='flex flex-col'>
@@ -17,3 +18,5 @@ export async function NoteList() {
     </div>
   );
 }
+
+export const NoteList = asyncComponent(NoteListAsync);
