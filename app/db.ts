@@ -1,39 +1,15 @@
-import { generateRandomId } from './utils';
+import { PrismaClient } from '@prisma/client';
 
-export interface INote {
-  id: string;
-  content: string;
+declare global {
+  // allow global `var` declarations
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
 }
 
-const notes: INote[] = [
-  {
-    id: generateRandomId(),
-    content: 'This is a note of a user to do following tasks.',
-  },
-];
+export const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ['query'],
+  });
 
-export const notesDb = {
-  async getNote(noteId: string) {
-    const note = notes.filter((note) => note.id === noteId);
-    return note[0];
-  },
-
-  async getAllNotes() {
-    return notes;
-  },
-
-  async setNote(content: string) {
-    const id = generateRandomId();
-    const note = { id, content };
-    notes.push(note);
-
-    return note;
-  },
-
-  async deleteNote(noteId: string) {
-    const noteIndex = notes.findIndex((note) => note.id === noteId);
-    const note = { ...notes[noteIndex] };
-    notes.splice(noteIndex, 1);
-    return note;
-  },
-};
+if (process.env.NODE_ENV !== 'production') global.prisma = prisma;

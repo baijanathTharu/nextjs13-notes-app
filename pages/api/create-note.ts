@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { INote, notesDb } from '../../app/db';
+import { INote, notesDb } from '../../app/db-utils';
 
 export type ICreateNotePayload = {
   content: string;

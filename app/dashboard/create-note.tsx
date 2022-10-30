@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ICreateNotePayload } from '../../pages/api/create-note';
-import { INote } from '../db';
+import { INote } from '../db-utils';
 
 async function createNoteReq(body: ICreateNotePayload) {
   try {
@@ -46,12 +46,12 @@ export function CreateNote() {
         content,
       });
       setContent('');
+      router.refresh();
+      setShowForm(false);
     } catch (error: any) {
       setError(error.message);
     } finally {
       setSubmitting(false);
-      console.log('refreshing..');
-      router.refresh();
     }
   };
 

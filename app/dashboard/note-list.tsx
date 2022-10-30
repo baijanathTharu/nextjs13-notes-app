@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { notesDb } from '../db';
+import { notesDb } from '../db-utils';
 import { asyncComponent } from '../utils';
 
 async function getNotes() {
