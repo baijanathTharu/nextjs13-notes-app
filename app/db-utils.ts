@@ -30,6 +30,19 @@ export const notesDb = {
     return createdNote;
   },
 
+  async updateNote({ id, content }: { id: string; content: string }) {
+    const updated = await prisma.note.update({
+      where: {
+        id,
+      },
+      data: {
+        content,
+      },
+    });
+
+    return updated;
+  },
+
   async deleteNote(noteId: string) {
     const noteToDelete = await prisma.note.findUnique({
       where: {

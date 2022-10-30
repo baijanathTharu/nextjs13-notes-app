@@ -13,7 +13,7 @@ async function NoteListAsync() {
     <div className='flex flex-col'>
       {notes.map(({ id, content }) => {
         return (
-          <Link href={`/dashboard/${id}`} key={id}>
+          <Link href={`/notes/${id}`} key={id}>
             <div className='my-4 border-2 rounded p-4 m-2 cursor-pointer hover:bg-slate-300'>
               {content.slice(0, 50)}
             </div>
